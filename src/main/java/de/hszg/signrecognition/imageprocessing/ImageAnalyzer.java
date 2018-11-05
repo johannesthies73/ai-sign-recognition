@@ -13,7 +13,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -72,7 +74,7 @@ public class ImageAnalyzer {
         return null;
     }
 
-    private Map<String, Integer> calcColorRatios(BufferedImage image) {
+    private List<Integer> calcColorRatios(BufferedImage image) {
 
         Map<String, Integer> colorRatiosMap = new HashMap<>();
 
@@ -93,11 +95,15 @@ public class ImageAnalyzer {
             }
         }
 
-        //TODO: Change for relative Ratios
         int totalNumberOfPixels = image.getWidth() * image.getHeight();
-        calcRelativeRatio(colorRatiosMap, totalNumberOfPixels);
+//        calcRelativeRatio(colorRatiosMap, totalNumberOfPixels);
 
-        return colorRatiosMap;
+
+        //push all int ratios into features
+        List<Integer> features = new ArrayList<>();
+        features.addAll(colorRatiosMap.values());
+
+        return features;
     }
 
     private void calcRelativeRatio(Map<String, Integer> colorRatiosMap, int totalNumberOfPixels) {

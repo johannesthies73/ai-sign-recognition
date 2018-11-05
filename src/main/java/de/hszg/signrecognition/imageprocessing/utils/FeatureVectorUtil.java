@@ -1,13 +1,11 @@
 package de.hszg.signrecognition.imageprocessing.utils;
 
 import de.hszg.signrecognition.imageprocessing.entity.featurevector.FeatureVector;
+import javafx.util.Pair;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Slf4j
 public class FeatureVectorUtil {
@@ -23,22 +21,21 @@ public class FeatureVectorUtil {
         return true;
     }
 
-    public static List<FeatureVector> getRandomFeatureVectors(String fileName, float pickRate) {
+    public static Pair<List<FeatureVector>, List<FeatureVector>> getRandomFeatureVectors(String fileName, float pickRate) {
 
         List<FeatureVector> allFeatureVectors = loadFeatureVectorsFromFile(fileName);
-        List<FeatureVector> featureVectorsTraining = new ArrayList<>();
 
-        int numberOfTrainingData = Math.round(allFeatureVectors.size() * pickRate);
+        int trainingsDataEndIndex = Math.round(allFeatureVectors.size() * pickRate);
 
-        Random random = new Random();
-        for (int i = 0; i < numberOfTrainingData; i++) {
-            featureVectorsTraining.add(allFeatureVectors.get(
-                    random.nextInt(allFeatureVectors.size())
-            ));
-        }
+        Collections.shuffle(allFeatureVectors);
 
-        return featureVectorsTraining;
+        Pair<List<FeatureVector>, List<FeatureVector>> learnAndClassifyData = new Pair<>(
+                allFeatureVectors.subList(0, trainingsDataEndIndex),
+                allFeatureVectors.subList(trainingsDataEndIndex, allFeatureVectors.size()));
+
+        return learnAndClassifyData;
     }
+
 
     public static List<FeatureVector> loadFeatureVectorsFromFile(String fileName) {
         try (ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("xdata/" + fileName)))) {

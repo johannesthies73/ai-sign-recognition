@@ -9,18 +9,20 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-public class SignFeatureVector implements FeatureVector {
+public class SignFeatureVectorOld implements FeatureVector {
 
     private Sign sign;
-    private List<Integer> features;
+    private List<SignFeature> features;
 
-    public SignFeatureVector(Sign sign, List<Integer>... featureLists) {
+    public SignFeatureVectorOld(Sign sign, Map<String, Integer>... colorRatiosMaps) {
 
         this.sign = sign;
         features = new ArrayList<>();
 
-        Arrays.stream(featureLists).forEach(featureList -> {
-            features.addAll(featureList);
+        Arrays.stream(colorRatiosMaps).forEach(colorRatiosMap -> {
+            colorRatiosMap.forEach((colorString, ratio) -> {
+                features.add(new SignFeature(colorString, roundRatio(ratio)));
+            });
         });
 
     }
@@ -48,11 +50,11 @@ public class SignFeatureVector implements FeatureVector {
 
     @Override
     public int getFeatureValue(int i) {
-        return features.get(i);
+        return features.get(i).getColorRatio();
     }
 
     @Override
     public List<Integer> getFeatureValues() {
-        return features;
+        return features.stream().map(SignFeature::getColorRatio).collect(Collectors.toList());
     }
 }

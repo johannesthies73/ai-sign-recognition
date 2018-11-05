@@ -20,5 +20,5 @@ public interface Learner {
 	 * @param example: is a feature vector
 	 * @return the concept of the examplke as learned by this before
 	 */
-//	Sign classify(FeatureVector example);
+	Sign classify(FeatureVector example);
 }

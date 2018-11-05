@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Random;
 
 @Slf4j
-public class Perceptron implements Serializable{
+public class Perceptron implements Serializable {
 
     private List<Double> weights;
     private Integer bitIndex;
     private final double LEARNING_RATE;
 
-    public Perceptron(int numberOfInputs, int bitIndex, double learningRate) {
+    public Perceptron(int numberOfInputs, int bitIndex, double initialWeightFactor, double learningRate) {
         this.LEARNING_RATE = learningRate;
         this.bitIndex = bitIndex;
         this.weights = new ArrayList<>();
@@ -25,18 +25,16 @@ public class Perceptron implements Serializable{
 
         //INITIALIZE WEIGHTS WITH RANDOM VALUES
         for (int i = 0; i < numberOfInputs; i++) {
-            this.weights.add(random.nextDouble()); //next double * 50
-/*
-            this.weights.add(0.0);
-*/
+            this.weights.add(random.nextDouble() * initialWeightFactor); //next double * 50
+//            this.weights.add(0.0);
         }
     }
 
-    public int guess(FeatureVector featureVector) {
+    public int guess(List<Integer> featureValues) {
 
         int sum = 0;
-        for (int i = 0; i < featureVector.getNumberOfFeatures(); i++) {
-            sum += featureVector.getFeatureValues().get(i) * this.weights.get(i);
+        for (int i = 0; i < featureValues.size(); i++) {
+            sum += featureValues.get(i) * this.weights.get(i);
         }
 
         return activationFunction(sum);
@@ -51,12 +49,12 @@ public class Perceptron implements Serializable{
     public void trainPerceptron(FeatureVector featureVector) {
         int rightAnswer = calculateRightAnswer(featureVector.getSign(), this.bitIndex);
 
-        int guess = guess(featureVector);
+        int guess = guess(featureVector.getFeatureValues());
         int error = rightAnswer - guess;
 
         /*correct weight values*/
         for (int i = 0; i < weights.size(); i++) {
-            weights.set(i, weights.get(i) + error * featureVector.getFeatureValues().get(i) * LEARNING_RATE);
+            weights.set(i, weights.get(i) + error * featureVector.getFeatureValue(i) * LEARNING_RATE);
         }
     }
 

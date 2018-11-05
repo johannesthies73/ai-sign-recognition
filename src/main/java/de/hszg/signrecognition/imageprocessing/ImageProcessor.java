@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
 public class ImageProcessor {
 
     private static final String OUTPUT_FILENAME = "featureVectors.dat";
-    private static final String BASE_PATH = "C:\\Users\\jthies\\Documents\\Studium\\Professoren\\Ringwelski\\7. Semester\\Künstliche instelligenz\\Verkehrsschilder\\english\\all_images";
+    private static final String BASE_PATH = "C:\\Users\\jthies\\Documents\\Studium\\Professoren\\Ringwelski\\7. Semester\\Künstliche instelligenz\\Verkehrsschilder\\english\\ausgedünnt";
+//    private static final String BASE_PATH = "C:\\Users\\jthies\\Pictures\\kuenstliche_intelligenz\\bilder_paul\\VERKEHRSZEICHEN";
 
     private void start() {
         long t = System.nanoTime();
@@ -52,6 +53,13 @@ public class ImageProcessor {
         fileLoader.loadFiles("\\priorityroad").stream().forEach(file -> fileSignPairs.add(new FileSignPair(file, Sign.PRIORITY_ROAD)));
         fileLoader.loadFiles("\\yield").stream().forEach(file -> fileSignPairs.add(new FileSignPair(file, Sign.YIELD)));
         fileLoader.loadFiles("\\yieldright").stream().forEach(file -> fileSignPairs.add(new FileSignPair(file, Sign.YIELD_RIGHT)));
+
+//        fileLoader.loadFiles("\\LINKS").stream().forEach(file -> fileSignPairs.add(new FileSignPair(file, Sign.LEFT)));
+//        fileLoader.loadFiles("\\RECHTS").stream().forEach(file -> fileSignPairs.add(new FileSignPair(file, Sign.RIGHT)));
+//        fileLoader.loadFiles("\\STOP").stream().forEach(file -> fileSignPairs.add(new FileSignPair(file, Sign.STOP)));
+//        fileLoader.loadFiles("\\HAUPTSTRASSE").stream().forEach(file -> fileSignPairs.add(new FileSignPair(file, Sign.PRIORITY_ROAD)));
+//        fileLoader.loadFiles("\\VORFART_GEWAEHREN").stream().forEach(file -> fileSignPairs.add(new FileSignPair(file, Sign.YIELD)));
+//        fileLoader.loadFiles("\\RECHTS_VOR_LINKS").stream().forEach(file -> fileSignPairs.add(new FileSignPair(file, Sign.YIELD_RIGHT)));
 
         return fileSignPairs;
 

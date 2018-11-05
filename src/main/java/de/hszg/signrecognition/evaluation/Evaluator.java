@@ -5,35 +5,47 @@ import de.hszg.signrecognition.evaluation.entity.FeatureVectorSignPair;
 import de.hszg.signrecognition.imageprocessing.entity.Sign;
 import de.hszg.signrecognition.imageprocessing.entity.featurevector.FeatureVector;
 import de.hszg.signrecognition.imageprocessing.utils.FeatureVectorUtil;
+import de.hszg.signrecognition.learner.Learner;
+import de.hszg.signrecognition.learner.perceptron.PerceptronLearner;
+import de.hszg.signrecognition.learner.perceptron.PerceptronLearnerBuilder;
 import de.hszg.signrecognition.learner.perceptron.entity.Perceptron;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Evaluator {
 
-    public static void main(String[] args) {
-        new Evaluator().evaluate(
-                FeatureVectorUtil.loadFeatureVectorsFromFile("featureVectors.dat"),
-                Perceptron.loadNeuralNetworkFromFile("neuralNetwork.dat")
-        );
+    private static int NUMBER_OF_LEARNING_INSTANCES = 100;
+    private static String INPUT_FILENAME = "featureVectors.dat";
+    private static float PICK_RATE = 0.01f;
 
+    public static void main(String[] args) {
+
+        for (int i = 0; i < NUMBER_OF_LEARNING_INSTANCES; i++) {
+            PerceptronLearner perceptronLearner = new PerceptronLearnerBuilder()
+                    .setLearningIterations(500)
+                    .setInitialWeightFactor(10)
+                    .setLearningRate(0.05)
+                    .createPerceptronLearner();
+
+
+            Pair<List<FeatureVector>, List<FeatureVector>> fvPair = FeatureVectorUtil.getRandomFeatureVectors(INPUT_FILENAME, PICK_RATE);
+            perceptronLearner.learn(fvPair.getKey());
+
+
+            new Evaluator().evaluate(fvPair.getValue(), perceptronLearner);
+        }
     }
 
-    private void evaluate(List<FeatureVector> vectorsToClassify, List<Perceptron> trainedNeuralNetwork) { //TODO:LEARNER übergeben um generischer zu macehn??
+    private void evaluate(List<FeatureVector> vectorsToClassify, Learner learner) { //TODO:LEARNER übergeben um generischer zu macehn??
         List<FeatureVectorSignPair> featureVectorSignPairs = new ArrayList<>();
 
         System.out.println("calculating ratio of right guesses...");
         vectorsToClassify.stream().forEach(featureVector -> {
-            int bit1 = trainedNeuralNetwork.get(0).guess(featureVector);
-            int bit2 = trainedNeuralNetwork.get(1).guess(featureVector);
-            int bit3 = trainedNeuralNetwork.get(2).guess(featureVector);
 
-            Sign guess = Perceptron.guessSign(bit1, bit2, bit3);
-
+            Sign guess = learner.classify(featureVector);
             featureVectorSignPairs.add(new FeatureVectorSignPair(featureVector, guess));
         });
 
