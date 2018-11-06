@@ -2,22 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d58ca09f-78fd-490e-bbb1-b529b14efd4c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/perceptron/entity/RatioResult.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/Evaluator2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/Evaluator2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/evaluation/Evaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/evaluation/Evaluator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/evaluation/entity/FeatureVectorSignPair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/evaluation/entity/RightAnswerGuessPair.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/Learner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/Learner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/perceptron/PerceptronLearner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/perceptron/PerceptronLearner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/perceptron/entity/Perceptron.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/perceptron/entity/Perceptron.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ai-sign-recognition-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/evaluation/Evaluator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/evaluation/Evaluator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/evaluation/entity/FeatureVectorSignPair.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/imageprocessing/ImageAnalyzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/imageprocessing/ImageAnalyzer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/imageprocessing/ImageProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/imageprocessing/ImageProcessor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/learner/perceptron/PerceptronLearner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/learner/perceptron/PerceptronLearner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/learner/perceptron/entity/Perceptron.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/learner/perceptron/entity/Perceptron.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/Evaluator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/imageprocessing/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/imageprocessing/ImageLoader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/imageprocessing/Point.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/imageprocessing/utils/Farberkennung$Farbe.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/imageprocessing/utils/Farberkennung.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/de/hszg/signrecognition/learner/SignLearner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -71,15 +66,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="156" />
-          <entry key="java" value="28629" />
-          <entry key="txt" value="141" />
+          <entry key="java" value="28631" />
+          <entry key="txt" value="263" />
           <entry key="xml" value="75" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="28146" />
-          <entry key="PLAIN_TEXT" value="297" />
+          <entry key="JAVA" value="28148" />
+          <entry key="PLAIN_TEXT" value="419" />
           <entry key="Scratch" value="483" />
           <entry key="XML" value="75" />
         </counts>
@@ -91,7 +86,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/imageprocessing/ImageProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
@@ -116,7 +111,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/perceptron/entity/Perceptron.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="425">
@@ -290,7 +285,6 @@
         <option value="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/evaluation/entity/RightAnswerGuessPair.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/perceptron/entity/ResultRatios.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/perceptron/PerceptronLearner.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/imageprocessing/ImageProcessor.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/imageprocessing/ImageAnalyzer.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/perceptron/entity/ResultRatio.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/perceptron/entity/Result.java" />
@@ -298,6 +292,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/evaluation/Evaluator.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/perceptron/entity/Perceptron.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/imageprocessing/ImageProcessor.java" />
       </list>
     </option>
   </component>
@@ -433,7 +428,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541466558571" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541466765722" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -550,7 +545,7 @@
       <workItem from="1540908503413" duration="17552000" />
       <workItem from="1541037285687" duration="3005000" />
       <workItem from="1541161088586" duration="2539000" />
-      <workItem from="1541287833940" duration="36769000" />
+      <workItem from="1541287833940" duration="36975000" />
     </task>
     <task id="LOCAL-00001" summary="changed signfeaturevector featurestype from map&lt;colorname,int&gt; to list&lt;integer&gt;&#10;&#10;started implementing evaluator">
       <created>1541415947637</created>
@@ -559,11 +554,18 @@
       <option name="project" value="LOCAL" />
       <updated>1541415947637</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added standard deviation calculation&#10;added confidence interval calculation&#10;&#10;in evaluator&#10;&#10;refactoring required">
+      <created>1541466670495</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1541466670495</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="274737000" />
+    <option name="totallyTimeSpent" value="274943000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -616,7 +618,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="changed signfeaturevector featurestype from map&lt;colorname,int&gt; to list&lt;integer&gt;&#10;&#10;started implementing evaluator" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed signfeaturevector featurestype from map&lt;colorname,int&gt; to list&lt;integer&gt;&#10;&#10;started implementing evaluator" />
+    <MESSAGE value="added standard deviation calculation&#10;added confidence interval calculation&#10;&#10;in evaluator&#10;&#10;refactoring required" />
+    <option name="LAST_COMMIT_MESSAGE" value="added standard deviation calculation&#10;added confidence interval calculation&#10;&#10;in evaluator&#10;&#10;refactoring required" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -993,10 +996,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/imageprocessing/ImageProcessor.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/perceptron/entity/Perceptron.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="184" selection-start-line="16" selection-start-column="184" selection-end-line="16" selection-end-column="184" />
+        <state relative-caret-position="425">
+          <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1014,10 +1017,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/learner/perceptron/entity/Perceptron.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/hszg/signrecognition/imageprocessing/ImageProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
+        <state relative-caret-position="272">
+          <caret line="16" column="184" selection-start-line="16" selection-start-column="184" selection-end-line="16" selection-end-column="184" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

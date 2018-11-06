@@ -1,0 +1,55 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+bin/
+
+# Java EE
+faces-config.NavData
+
+# Latex
+*.aux
+*.log
+*.blg
+*.synctex
+*.tps
+*.bbl
+*.out
+*.auxlock
+*.bcf
+*.run.xml
+*.md5
+*.tmp
+*.lof
+*.lot
+*.toc
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+*.idx
+*.ilg
+*.ind
+*.loa
+*.lol
+*.sct
+*.thm
+*.bak
+
+# Nodejs
+node_modules/
