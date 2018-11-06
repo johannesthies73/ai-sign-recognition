@@ -61,7 +61,7 @@ private Vector<Integer> evaluate(List<FeatureVector> list, Learner learner) {
 		for(FeatureVector fv : list){
 //			Sign c = learner.classify(fv);
 //			if(c.equals(Sign.UNKNOWN)) unknown++;
-//			else if(c.equals(fv.getSign())) success++;
+//			else if(c.equals(fv.getGuess())) success++;
 //			else fault++;
 				
 		}

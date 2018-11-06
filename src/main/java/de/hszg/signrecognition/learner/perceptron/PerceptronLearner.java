@@ -38,18 +38,13 @@ public class PerceptronLearner implements Learner {
         p3 = new Perceptron(trainingSet.get(0).getNumberOfFeatures(), 2, learningRate, initialWeightFactor);
 
         //train neural network
-        System.out.println("training neural network...");
         for (int i = 0; i < learningIterations; i++) {
-//            System.out.println("Iteration " + (i + 1));
-
             trainingSet.stream().forEach(featureVector -> {
                 p1.trainPerceptron(featureVector);
                 p2.trainPerceptron(featureVector);
                 p3.trainPerceptron(featureVector);
             });
         }
-
-        System.out.println("finished Training!");
 
 //        Perceptron.writeNeuralNetworkIntoFile(OUTPUT_FILENAME, Arrays.asList(p1, p2, p3));
 

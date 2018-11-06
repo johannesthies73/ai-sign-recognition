@@ -58,12 +58,12 @@ public class Perceptron implements Serializable {
         }
     }
 
-    private int calculateRightAnswer(Sign sign, Integer bitIndex) {
+    private Integer calculateRightAnswer(Sign sign, Integer bitIndex) {
         switch (sign) {
-            case LEFT:
+            case LEFT: //for input LEFT only correct digits can be 0 for every of the 3 neurons
                 return 0;
             case RIGHT:
-                if (bitIndex == 0 || bitIndex == 1) {
+                if (bitIndex == 0 || bitIndex == 1) { //only correct digits for input RIGHT are 0 for neuron 0 and 1 AND 1 for neuron 2
                     return 0;
                 } else return 1;
             case STOP:
@@ -82,28 +82,8 @@ public class Perceptron implements Serializable {
                 if (bitIndex == 0 || bitIndex == 2) {
                     return 1;
                 } else return 0;
-        }
-
-        return 0;
-    }
-
-    public static boolean checkIfGuessIsRight(int bit1, int bit2, int bit3, Sign sign) {
-        int value = Integer.parseInt("" + bit1 + bit2 + bit3, 2);
-
-        if (value == 0 && sign.equals(Sign.LEFT)) {
-            return true;
-        } else if (value == 1 && sign.equals(Sign.RIGHT)) {
-            return true;
-        } else if (value == 2 && sign.equals(Sign.STOP)) {
-            return true;
-        } else if (value == 3 && sign.equals(Sign.PRIORITY_ROAD)) {
-            return true;
-        } else if (value == 4 && sign.equals(Sign.YIELD)) {
-            return true;
-        } else if (value == 5 && sign.equals(Sign.YIELD_RIGHT)) {
-            return true;
-        } else {
-            return false;
+            default:
+                return null;
         }
     }
 

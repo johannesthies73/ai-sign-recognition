@@ -15,7 +15,7 @@ public interface Learner {
 	
 	/**
 	 * find the concept of the example from the internal knowledge of the lerner
-	 * this method must not consider example.getSign() at all!!
+	 * this method must not consider example.getGuess() at all!!
 	 * 
 	 * @param example: is a feature vector
 	 * @return the concept of the examplke as learned by this before
