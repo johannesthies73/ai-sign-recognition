@@ -1,18 +1,12 @@
 package de.hszg.signrecognition.learner.perceptron;
 
 public class PerceptronLearnerBuilder {
-    private String outputFilename;
-    private int learningIterations;
+    private int numberOfInputsPerNeuron;
     private double learningRate;
     private int initialWeightFactor;
 
-    public PerceptronLearnerBuilder setOutputFilename(String outputFilename) {
-        this.outputFilename = outputFilename;
-        return this;
-    }
-
-    public PerceptronLearnerBuilder setLearningIterations(int learningIterations) {
-        this.learningIterations = learningIterations;
+    public PerceptronLearnerBuilder setNumberOfInputsPerNeuron(int numberOfInputsPerNeuron) {
+        this.numberOfInputsPerNeuron = numberOfInputsPerNeuron;
         return this;
     }
 
@@ -27,6 +21,6 @@ public class PerceptronLearnerBuilder {
     }
 
     public PerceptronLearner createPerceptronLearner() {
-        return new PerceptronLearner(outputFilename, learningIterations, learningRate, initialWeightFactor);
+        return new PerceptronLearner(numberOfInputsPerNeuron, learningRate, initialWeightFactor);
     }
 }

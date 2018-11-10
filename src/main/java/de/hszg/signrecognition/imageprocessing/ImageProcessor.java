@@ -14,7 +14,8 @@ import java.util.stream.Collectors;
 public class ImageProcessor {
 
     private static final String OUTPUT_FILENAME = "featureVectors.dat";
-    private static final String BASE_PATH = "C:\\Users\\jthies\\Documents\\Studium\\Professoren\\Ringwelski\\7. Semester\\Künstliche instelligenz\\Verkehrsschilder\\english\\ausgedünnt";
+//    private static final String BASE_PATH = "C:\\Users\\jthies\\Documents\\Studium\\Professoren\\Ringwelski\\7. Semester\\Künstliche instelligenz\\Verkehrsschilder\\english\\ausgedünnt";
+    private static final String BASE_PATH = "C:\\Users\\jthies\\Documents\\Studium\\Professoren\\Ringwelski\\7. Semester\\Künstliche instelligenz\\Verkehrsschilder\\english\\all_images";
 //    private static final String BASE_PATH = "C:\\Users\\jthies\\Pictures\\kuenstliche_intelligenz\\bilder_paul\\VERKEHRSZEICHEN";
 
     private void start() {

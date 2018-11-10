@@ -2,10 +2,12 @@ package de.hszg.signrecognition.imageprocessing;
 
 import de.hszg.signrecognition.imageprocessing.entity.Point;
 import de.hszg.signrecognition.imageprocessing.utils.ColorUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
+@Slf4j
 public class ImageCutter {
 
     public static BufferedImage cutOffBezels(BufferedImage image) {
@@ -16,9 +18,14 @@ public class ImageCutter {
         Point rightPoint = cutPixelsBottomUp(image, image.getWidth(), image.getHeight());
 
 
-        int width = image.getWidth() - leftPoint.getX() - (image.getWidth() - rightPoint.getX());
-        int height = image.getHeight() - topPoint.getY() - (image.getHeight() - bottomPoint.getY());
-        image = image.getSubimage(leftPoint.getX(), topPoint.getY(), width, height);
+        try {
+            int width = image.getWidth() - leftPoint.getX() - (image.getWidth() - rightPoint.getX());
+            int height = image.getHeight() - topPoint.getY() - (image.getHeight() - bottomPoint.getY());
+            image = image.getSubimage(leftPoint.getX(), topPoint.getY(), width, height);
+        } catch (Exception e) {
+            log.debug("whoops.. cutting image failed");
+        }
+
 
         return image;
     }

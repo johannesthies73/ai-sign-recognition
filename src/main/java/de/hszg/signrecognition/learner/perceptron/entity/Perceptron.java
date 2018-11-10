@@ -25,7 +25,7 @@ public class Perceptron implements Serializable {
 
         //INITIALIZE WEIGHTS WITH RANDOM VALUES
         for (int i = 0; i < numberOfInputs; i++) {
-            this.weights.add(random.nextDouble() * initialWeightFactor); //next double * 50
+            this.weights.add(/*random.nextDouble() **/ initialWeightFactor); //next double * 50
 //            this.weights.add(0.0);
         }
     }
@@ -54,7 +54,7 @@ public class Perceptron implements Serializable {
 
         /*correct weight values*/
         for (int i = 0; i < weights.size(); i++) {
-            weights.set(i, weights.get(i) + error * featureVector.getFeatureValue(i) * LEARNING_RATE);
+            weights.set(i, weights.get(i) + (error * featureVector.getFeatureValue(i) * LEARNING_RATE));
         }
     }
 

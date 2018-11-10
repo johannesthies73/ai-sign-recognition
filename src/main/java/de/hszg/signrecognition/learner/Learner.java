@@ -11,7 +11,7 @@ public interface Learner {
 	 * @param trainingSet contains feature vectors and corresponding concepts 
 	 * to provide experience to learn from  
 	 */
-	void learn(List<FeatureVector> trainingSet);
+	int learn(List<FeatureVector> trainingSet, float coverage);
 	
 	/**
 	 * find the concept of the example from the internal knowledge of the lerner

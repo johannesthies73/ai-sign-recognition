@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @NoArgsConstructor
@@ -18,36 +19,66 @@ public class PerceptronLearner implements Learner {
     private Perceptron p2;
     private Perceptron p3;
 
-    private String outputFilename;
-    private int learningIterations;
     private double learningRate;
     private int initialWeightFactor;
 
-    public PerceptronLearner(String outputFilename, int learningIterations, double learningRate, int initialWeightFactor) {
-        this.outputFilename = outputFilename;
-        this.learningIterations = learningIterations;
+    public PerceptronLearner(int numberOfInputsPerNeuron, double learningRate, int initialWeightFactor) {
         this.learningRate = learningRate;
         this.initialWeightFactor = initialWeightFactor;
+
+        p1 = new Perceptron(numberOfInputsPerNeuron, 0, initialWeightFactor, learningRate);
+        p2 = new Perceptron(numberOfInputsPerNeuron, 1, initialWeightFactor, learningRate);
+        p3 = new Perceptron(numberOfInputsPerNeuron, 2, initialWeightFactor, learningRate);
     }
 
     @Override
-    public void learn(List<FeatureVector> trainingSet) {
+    public int learn(List<FeatureVector> trainingSet, float coverage) {
+        int numberOfLearningIterations = 0;
 
-        p1 = new Perceptron(trainingSet.get(0).getNumberOfFeatures(), 0, learningRate, initialWeightFactor);
-        p2 = new Perceptron(trainingSet.get(0).getNumberOfFeatures(), 1, learningRate, initialWeightFactor);
-        p3 = new Perceptron(trainingSet.get(0).getNumberOfFeatures(), 2, learningRate, initialWeightFactor);
-
-        //train neural network
-        for (int i = 0; i < learningIterations; i++) {
+        //train neural network until coverage is reached
+//        while (!everyTrainingsVectorCorrect(trainingSet, coverage)) {
+//            numberOfLearningIterations++;
+//
+//            trainingSet.stream().forEach(featureVector -> {
+//                p1.trainPerceptron(featureVector);
+//                p2.trainPerceptron(featureVector);
+//                p3.trainPerceptron(featureVector);
+//            });
+//
+//        }
+        int z = 0;
+        while (z < 500) {
+            z++;
+            numberOfLearningIterations++;
             trainingSet.stream().forEach(featureVector -> {
                 p1.trainPerceptron(featureVector);
                 p2.trainPerceptron(featureVector);
                 p3.trainPerceptron(featureVector);
             });
+
         }
+
+        return numberOfLearningIterations;
+
 
 //        Perceptron.writeNeuralNetworkIntoFile(OUTPUT_FILENAME, Arrays.asList(p1, p2, p3));
 
+    }
+
+    private boolean everyTrainingsVectorCorrect(List<FeatureVector> trainingSet, float coverage) {
+
+        AtomicInteger right = new AtomicInteger();
+        trainingSet.parallelStream().forEach(featureVector -> {
+            if (featureVector.getSign() == classify(featureVector)) {
+                right.getAndIncrement();
+            }
+        });
+
+        double actualRight = 100 * right.get() / trainingSet.size();
+        if (actualRight / 100 >= coverage) {
+            return true;
+        }
+        return false;
     }
 
     @Override

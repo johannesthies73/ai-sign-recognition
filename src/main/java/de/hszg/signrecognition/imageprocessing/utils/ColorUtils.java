@@ -33,7 +33,6 @@ public class ColorUtils {
 
             new ColorName("VeryDarkBlue2", 102, 102, 200),
 
-
             new ColorName("VeryLightGreen", 102, 255, 102),
             new ColorName("LightGreen", 0, 255, 51),
             new ColorName("Green", 0, 204, 0),
