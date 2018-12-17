@@ -13,10 +13,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Slf4j
@@ -82,13 +80,19 @@ public class ImageAnalyzer {
             colorRatiosMap.put(colorName.getName(), 0);
         });
 
+//        int r = 0;
+//        int g = 0;
+//        int b = 0;
+
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
 
                 Color color = new Color(image.getRGB(x, y));
                 ColorName colorName = new ColorName(ColorUtils.getColorNameFromColor(color),
                         color.getRed(), color.getGreen(), color.getBlue());
-
+//                r += color.getRed();
+//                g += color.getGreen();
+//                b += color.getBlue();
                 Integer absoluteRatio = colorRatiosMap.get(colorName.getName()) + 1;
 
                 colorRatiosMap.put(colorName.getName(), absoluteRatio);
@@ -96,12 +100,17 @@ public class ImageAnalyzer {
         }
 
         int totalNumberOfPixels = image.getWidth() * image.getHeight();
-//        calcRelativeRatio(colorRatiosMap, totalNumberOfPixels);
+        calcRelativeRatio(colorRatiosMap, totalNumberOfPixels);
 
 
         //push all int ratios into features
         List<Integer> features = new ArrayList<>();
         features.addAll(colorRatiosMap.values());
+
+//        List<Integer> features2 = new ArrayList<>();
+//        features2.addAll(Arrays.asList(r / totalNumberOfPixels,
+//                g / totalNumberOfPixels,
+//                b / totalNumberOfPixels));
 
         return features;
     }

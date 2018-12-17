@@ -5,6 +5,7 @@ import de.hszg.signrecognition.imageprocessing.utils.FeatureVectorUtil;
 import de.hszg.signrecognition.learner.Learner;
 import de.hszg.signrecognition.learner.perceptron.entity.*;
 import de.hszg.signrecognition.imageprocessing.entity.featurevector.FeatureVector;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,44 +13,36 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
-@NoArgsConstructor
+@Data
 public class PerceptronLearner implements Learner {
 
     private Perceptron p1;
     private Perceptron p2;
     private Perceptron p3;
 
-    private double learningRate;
-    private int initialWeightFactor;
+    private final double LEARNING_RATE;
+    private final int INITIAL_WEIGHT_FACTOR;
+    private final float COVERAGE;
+    private int count;
 
-    public PerceptronLearner(int numberOfInputsPerNeuron, double learningRate, int initialWeightFactor) {
-        this.learningRate = learningRate;
-        this.initialWeightFactor = initialWeightFactor;
-
+    public PerceptronLearner(int numberOfInputsPerNeuron, double learningRate, int initialWeightFactor, float coverage) {
         p1 = new Perceptron(numberOfInputsPerNeuron, 0, initialWeightFactor, learningRate);
         p2 = new Perceptron(numberOfInputsPerNeuron, 1, initialWeightFactor, learningRate);
         p3 = new Perceptron(numberOfInputsPerNeuron, 2, initialWeightFactor, learningRate);
+
+        this.LEARNING_RATE = learningRate;
+        this.INITIAL_WEIGHT_FACTOR = initialWeightFactor;
+        this.COVERAGE = coverage;
+        this.count = 0;
+
     }
 
     @Override
-    public int learn(List<FeatureVector> trainingSet, float coverage) {
-        int numberOfLearningIterations = 0;
-
+    public void learn(List<FeatureVector> trainingSet) {
         //train neural network until coverage is reached
-//        while (!everyTrainingsVectorCorrect(trainingSet, coverage)) {
-//            numberOfLearningIterations++;
-//
-//            trainingSet.stream().forEach(featureVector -> {
-//                p1.trainPerceptron(featureVector);
-//                p2.trainPerceptron(featureVector);
-//                p3.trainPerceptron(featureVector);
-//            });
-//
-//        }
-        int z = 0;
-        while (z < 500) {
-            z++;
-            numberOfLearningIterations++;
+        while (!everyTrainingsVectorCorrect(trainingSet, COVERAGE)) {
+            count++;
+
             trainingSet.stream().forEach(featureVector -> {
                 p1.trainPerceptron(featureVector);
                 p2.trainPerceptron(featureVector);
@@ -57,12 +50,17 @@ public class PerceptronLearner implements Learner {
             });
 
         }
+    }
 
-        return numberOfLearningIterations;
+    @Override
+    public Sign classify(FeatureVector featureVector) {
+        int bit1 = p1.guess(featureVector.getFeatureValues());
+        int bit2 = p2.guess(featureVector.getFeatureValues());
+        int bit3 = p3.guess(featureVector.getFeatureValues());
 
+        Sign guess = Perceptron.guessSign(bit1, bit2, bit3);
 
-//        Perceptron.writeNeuralNetworkIntoFile(OUTPUT_FILENAME, Arrays.asList(p1, p2, p3));
-
+        return guess;
     }
 
     private boolean everyTrainingsVectorCorrect(List<FeatureVector> trainingSet, float coverage) {
@@ -79,17 +77,6 @@ public class PerceptronLearner implements Learner {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public Sign classify(FeatureVector featureVector) {
-        int bit1 = p1.guess(featureVector.getFeatureValues());
-        int bit2 = p2.guess(featureVector.getFeatureValues());
-        int bit3 = p3.guess(featureVector.getFeatureValues());
-
-        Sign guess = Perceptron.guessSign(bit1, bit2, bit3);
-
-        return guess;
     }
 
 }

@@ -1,6 +1,5 @@
 package de.hszg.signrecognition.evaluation;
 
-
 import de.hszg.signrecognition.evaluation.entity.ChartData;
 import de.hszg.signrecognition.evaluation.entity.Config;
 import de.hszg.signrecognition.evaluation.entity.ConfigResult;
@@ -9,8 +8,8 @@ import de.hszg.signrecognition.imageprocessing.entity.Sign;
 import de.hszg.signrecognition.imageprocessing.entity.featurevector.FeatureVector;
 import de.hszg.signrecognition.imageprocessing.utils.FeatureVectorUtil;
 import de.hszg.signrecognition.learner.Learner;
-import de.hszg.signrecognition.learner.perceptron.PerceptronLearner;
-import de.hszg.signrecognition.learner.perceptron.PerceptronLearnerBuilder;
+import de.hszg.signrecognition.learner.kmeans.KmeansLearner;
+import de.hszg.signrecognition.learner.knearestneighnors.KnnLearner;
 import de.hszg.signrecognition.learner.perceptron.entity.RatioResult;
 import de.hszg.signrecognition.view.ChartDataGenerator;
 import de.hszg.signrecognition.view.JsonProducer;
@@ -22,41 +21,37 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
 
-
 @Slf4j
-public class Evaluator {
+public class KmeansEvaluator {
 
     private static final String INPUT_FILENAME = "featureVectors.dat";
     private static final float PICK_RATE = 0.1f;//0.1f
 
     private static final int NUMBER_OF_LEARNING_INSTANCES_PER_CONFIG = 10; //100
-    private static final float LEARNING_RATE = 0.01f;//1f
-    private static final float COVERAGE = 0.7f;
 
     public static void main(String[] args) {
 
-
         log.debug("starting calculation...");
         ChartData chartData = new ChartDataGenerator().generate(Arrays.asList(
-                calculateAvgRatiosForConfig(0),
+//                calculateAvgRatiosForConfig(2),
+//                calculateAvgRatiosForConfig(3),
+                calculateAvgRatiosForConfig(4),
                 calculateAvgRatiosForConfig(10),
-                calculateAvgRatiosForConfig(1000),
-                calculateAvgRatiosForConfig(10000),
-                calculateAvgRatiosForConfig(100000)
+                calculateAvgRatiosForConfig(20),
+                calculateAvgRatiosForConfig(30)
         ));
 
         String jsonString = JsonProducer.getChartDataAsString(chartData);
 
-        writeStringIntoFile("jsonString.dat", jsonString);
+        writeStringIntoFile("jsonStringKnn.dat", jsonString);
 
 //        new RestClient("http://localhost", 8086, "/chartdata").sendData(jsonString);
 
     }
 
-    private static ConfigResult calculateAvgRatiosForConfig(int initialWeightsFactor) {
+    private static ConfigResult calculateAvgRatiosForConfig(int k) {
         long t = System.currentTimeMillis();
 
-        int totalNumberOfLearningIterationsPerConfig = 0;
         List<Double> allRatiosPerConfig = new ArrayList<>();
 
         for (int i = 0; i < NUMBER_OF_LEARNING_INSTANCES_PER_CONFIG; i++) {
@@ -64,17 +59,10 @@ public class Evaluator {
             List<FeatureVector> trainingSet = fvPair.getKey();
             List<FeatureVector> classifySet = fvPair.getValue();
 
-            PerceptronLearner perceptronLearner = new PerceptronLearnerBuilder()
-                    .setNumberOfInputsPerNeuron(trainingSet.get(0).getNumberOfFeatures())
-                    .setInitialWeightFactor(initialWeightsFactor)
-                    .setLearningRate(LEARNING_RATE)
-                    .createPerceptronLearner();
+            Learner learner = new KmeansLearner(k);
+            learner.learn(trainingSet);
 
-
-            int numberOfLearningIterationsPerInstance = perceptronLearner.learn(trainingSet, COVERAGE);
-            totalNumberOfLearningIterationsPerConfig += numberOfLearningIterationsPerInstance;
-
-            Double ratio = calculateRatio(classifySet, perceptronLearner);
+            Double ratio = calculateRatio(classifySet, learner);
             allRatiosPerConfig.add(ratio);
 
 //            log.debug("Learning Instance " + i + "\t-> correct: " + Math.round(ratio) + " % " + "-> number of learning iterations: " + numberOfLearningIterationsPerInstance);
@@ -84,19 +72,16 @@ public class Evaluator {
 
         double learningRuntime = (0.0 + System.currentTimeMillis() - t) / 1000;
 
-        int avgNumberOfLearningIterationsPerInstance = totalNumberOfLearningIterationsPerConfig / NUMBER_OF_LEARNING_INSTANCES_PER_CONFIG;
 
-
-        log.debug("Results for Weightfactor " + initialWeightsFactor + ":");
+        log.debug("Results for K = " + k + ":");
         log.debug("Average Ratio: " + avgRatioPerConfig + " %");
         log.debug("Runtime: " + learningRuntime + " s");
-        log.debug("Average number of learning iterations: " + avgNumberOfLearningIterationsPerInstance);
         log.debug("############################");
 
 
         return new ConfigResult(
-                new Config(initialWeightsFactor, LEARNING_RATE),
-                new Result(avgRatioPerConfig, learningRuntime, avgNumberOfLearningIterationsPerInstance)
+                new Config(k, 0.0f),
+                new Result(avgRatioPerConfig, learningRuntime, 0)
         );
 
     }

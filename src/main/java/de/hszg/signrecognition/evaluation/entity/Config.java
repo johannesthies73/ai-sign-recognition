@@ -7,6 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class Config {
 
+
+
     private int initialWeightFactor;
     private float learningRate;
 

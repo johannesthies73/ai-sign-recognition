@@ -4,6 +4,7 @@ public class PerceptronLearnerBuilder {
     private int numberOfInputsPerNeuron;
     private double learningRate;
     private int initialWeightFactor;
+    private float coverage;
 
     public PerceptronLearnerBuilder setNumberOfInputsPerNeuron(int numberOfInputsPerNeuron) {
         this.numberOfInputsPerNeuron = numberOfInputsPerNeuron;
@@ -20,7 +21,12 @@ public class PerceptronLearnerBuilder {
         return this;
     }
 
+    public PerceptronLearnerBuilder setCoverage(float coverage) {
+        this.coverage = coverage;
+        return this;
+    }
+
     public PerceptronLearner createPerceptronLearner() {
-        return new PerceptronLearner(numberOfInputsPerNeuron, learningRate, initialWeightFactor);
+        return new PerceptronLearner(numberOfInputsPerNeuron, learningRate, initialWeightFactor, coverage);
     }
 }
